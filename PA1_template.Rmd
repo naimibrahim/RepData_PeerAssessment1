@@ -85,43 +85,43 @@ output:
     
 ## Are there differences in activity patterns between weekdays and weekends?
 
-   ##creating a char vector (week_day) 
+    ##creating a char vector (week_day) 
    
-   week <- wday(activity_filled_in$date)
-   week_day <- week
-   for (i in 1:17568) # loop to find the na
-    {
-     if(week[i] == 1)
-        week_day[i] <- 'weekend'
-     if(week[i] == 2)
-        week_day[i] <- 'weekday'
-     if(week[i] == 3)
-        week_day[i] <- 'weekday'
-     if(week[i] == 4)
-        week_day[i] <- 'weekday'
-     if(week[i] == 5)
-        week_day[i] <- 'weekday'
-     if(week[i] == 6)
-        week_day[i] <- 'weekday'
-     if(week[i] == 7)
-        week_day[i] <- 'weekend'
-    }
+    week <- wday(activity_filled_in$date)
+    week_day <- week
+    for (i in 1:17568) # loop to find the na
+     {
+      if(week[i] == 1)
+         week_day[i] <- 'weekend'
+      if(week[i] == 2)
+         week_day[i] <- 'weekday'
+      if(week[i] == 3)
+         week_day[i] <- 'weekday'
+      if(week[i] == 4)
+         week_day[i] <- 'weekday'
+      if(week[i] == 5)
+         week_day[i] <- 'weekday'
+      if(week[i] == 6)
+         week_day[i] <- 'weekday'
+      if(week[i] == 7)
+         week_day[i] <- 'weekend'
+     }
 
-  # Creating a new factor variable in the dataset activity_filled_in 
-  activity_filled_in$weekday <-week_day
+    # Creating a new factor variable in the dataset activity_filled_in 
+    activity_filled_in$weekday <-week_day
 
-   # finding the elements by "weekday" or "weekend"
-   weekday <- grep("weekday",activity_filled_in$weekday)
-   weekday_frame <- activity_filled_in[weekday,]
-   weekend_frame <- activity_filled_in[-weekday,]
+    # finding the elements by "weekday" or "weekend"
+    weekday <- grep("weekday",activity_filled_in$weekday)
+    weekday_frame <- activity_filled_in[weekday,]
+    weekend_frame <- activity_filled_in[-weekday,]
 
 
-   # What  is the average daily activity pattern?
+    # What  is the average daily activity pattern?
 
-   ## Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, 
-   ##    averaged across all days (yaxis)
-   five_minutes_average_weekday <- aggregate(steps~interval, data=weekday_frame, FUN=mean, na.rm=TRUE)
-   five_minutes_average_weekend <- aggregate(steps~interval, data=weekend_frame, FUN=mean, na.rm=TRUE)
+    ## Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, 
+    ##    averaged across all days (yaxis)
+    five_minutes_average_weekday <- aggregate(steps~interval, data=weekday_frame, FUN=mean, na.rm=TRUE)
+    five_minutes_average_weekend <- aggregate(steps~interval, data=weekend_frame, FUN=mean, na.rm=TRUE)
 
-   plot(x = five_minutes_average_weekday$interval, y = five_minutes_average_weekday$steps, type = "l") 
-   plot(x = five_minutes_average_weekend$interval, y = five_minutes_average_weekend$steps, type = "l") 
+    plot(x = five_minutes_average_weekday$interval, y = five_minutes_average_weekday$steps, type = "l") 
+    plot(x = five_minutes_average_weekend$interval, y = five_minutes_average_weekend$steps, type = "l") 
